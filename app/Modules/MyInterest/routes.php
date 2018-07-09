@@ -12,9 +12,9 @@
 */
 
 
-Route::group(['module' => 'Members', 'middleware' => ['web'], 'namespace' => 'App\Modules\Members\Controllers'], function() {
+Route::group(['module' => 'MyInterest', 'middleware' => ['web'], 'namespace' => 'App\Modules\MyInterest\Controllers'], function() {
     //Route::post('members','MembersController@index');
-		Route::get('members','MembersController@index');
+		Route::get('my_interest','MyInterestController@index');
 });
 
 

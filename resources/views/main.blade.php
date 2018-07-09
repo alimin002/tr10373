@@ -46,7 +46,7 @@
 		<link rel="shortcut icon" href="{{URL('assets/avatars/patra-title.ico')}}" />
 	</head>
 
-	<body class="no-skin">
+	<body class="no-skin" style='background-image: url("casanova.jpg");background-size: cover;  opacity : 0.8; background-repeat: no-repeat; background-position: center;'>
 		<!-- #section:basics/navbar.layout -->
 		<div id="navbar" class="navbar navbar-default">
 			<script type="text/javascript">
@@ -282,7 +282,7 @@
 				</script>
 				<ul class="nav nav-list">
 					<li class="active">
-						<a href="{{url('')}}">
+						<a href="#" onclick="displayFormFilter()">
 							<i class="menu-icon fa fa-search"></i>
 							<span class="menu-text">Search</span>
 						</a>
@@ -291,7 +291,7 @@
 					</li>
 
 					<li class="">
-						<a href="#" class="dropdown-toggle">
+						<a href="{{url('match')}}">
 							<i class="menu-icon fa fa-venus-mars"></i>
 							<span class="menu-text">Match</span>
 						</a>
@@ -303,19 +303,19 @@
 						</a>
 					</li>
 					<li class="">
-						<a href="#" class="dropdown-toggle">
+						<a href="{{url('interested_in_me')}}">
 							<i class="menu-icon fa fa-venus-marsx"></i>
 							<span class="menu-text">Interested In Me</span>
 						</a>
 					</li>
 					<li class="">
-						<a href="#" class="dropdown-toggle">
+						<a href="{{url('my_interest')}}">
 							<i class="menu-icon fa fa-venus-marsx"></i>
 							<span class="menu-text">My Interest</span>
 						</a>
 					</li>
 					<li class="">
-						<a href="#" class="dropdown-toggle">
+						<a href="{{url('members_online')}}" >
 							<i class="menu-icon fa fa-circle" style="color:green"></i>
 							<span class="menu-text">Members Online</span>
 						</a>
@@ -373,6 +373,34 @@
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
+			<!-- Modal Add Data-->
+			<div class="modal fade" id="modal-filter-members" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Search Member</h4>
+						</div>
+						<div class="modal-body">
+								<form name="frm-messanger" id="frm-messanger" action="{{url('sales/save')}}" method="post">
+								{{ csrf_field() }}
+								<div class="row">
+									<div class="col-sm-12">								
+										<div class="form-group">
+											
+										</div>
+									</div>
+								</form>																	
+							 </div>														
+						</div>
+						<div class="modal-footer">
+							<button onclick="goToMessanger()" type="button" class="btn btn-primary">Search</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+						</div>										
+					</div>
+				</div>
+			</div>
+<!--end modal add data-->
 		</div><!-- /.main-container -->
 		
 
@@ -414,6 +442,10 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+			//display popup modal search
+			function displayFormFilter(){
+					$("#modal-filter-members").modal("show");
+			}
 		
 		</script>
 

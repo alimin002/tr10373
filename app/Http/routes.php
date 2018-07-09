@@ -10,9 +10,20 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/**
 Route::get('/','login@displayLogin');
 Route::get('login','login@checkLogin');
 Route::POST('do_login','login@displayHome');
 Route::POST('register','login@do_register');
 Route::get('logout','login@doLogout');
 Route::get('/home', 'HomeController@index');
+**/
+Route::group(['middleware' => ['web']], function(){
+		Route::get('/','login@displayLogin');
+		Route::get('login','login@checkLogin');
+		Route::POST('do_login','login@displayHome');
+		Route::POST('register','login@do_register');
+		Route::get('logout','login@doLogout');
+		Route::get('/home', 'HomeController@index');
+}); 
+

@@ -7,12 +7,29 @@
 				<h4 class="modal-title">Change Photo Profile</h4>
 			</div>
 			<div class="modal-body">
-							<!-- PAGE CONTENT BEGINS -->
-							<div>
-								<form action="../dummy.html" class="dropzone dz-clickable" id="dropzone">
-									
-								<div class="dz-default dz-message"><span><span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> Drop files</span> to upload 				<span class="smaller-80 grey">(or click)</span> <br> 				<i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i></span></div></form>
-							</div><!-- PAGE CONTENT ENDS -->
+						<div class="widget-main">												
+													<div class="form-group">
+														<div class="col-xs-12">
+															<label class="ace-file-input ace-file-multiple">
+																<input multiple="" type="file" id="id-input-file-3">
+																<!----
+																<span class="ace-file-container" data-title="Drop files here or click to choose"><span class="ace-file-name" data-title="No File ..."><i class=" ace-icon ace-icon fa fa-cloud-upload"></i></span>
+																</span>
+																<a class="remove" href="#"><i class=" ace-icon fa fa-times"></i></a>--->
+															</label>
+																<!-- #section:custom/file-input.filter -->
+															<label>
+																<input type="checkbox" name="file-format" id="id-file-format" class="ace" checked>
+																<span class="lbl"> Allow only images</span>
+															</label>
+
+															<!-- /section:custom/file-input.filter -->
+															<!-- /section:custom/file-input -->
+														</div>
+													</div>
+
+												
+												</div>
 														
 			</div>
 			<div class="modal-footer">

@@ -20,12 +20,8 @@ class login extends Controller
     }
 	
 		
-	 //this function called call at the begining when route is empty http://localhost/tr10373/
 		public function displayLogin(Request $request ){
-			  //print_r (session('session_login')); die();
-				//echo session('session_login')["username"]; die();
 				if ($request->session()->has('session_login')==false) {
-					//echo session('session_login');
 					return view('guard');
 				}else{
 					return Redirect::to('members');
@@ -38,24 +34,22 @@ class login extends Controller
 		}
 		
 		public function displayHome(Request $request){ 
-				$data_user		= $this->getUserData($request->input('email'));				
-				$email 		= $data_user["email"];
-				$password 		= $data_user["password"];
-				$username 		= $data_user["username"];
+				$data_user			= $this->getUserData($request->input('email'));				
+				$email 					= $data_user["email"];
+				$password 			= $data_user["password"];
+				$username 			= $data_user["username"];
+				$app_user_id 		= $data_user["app_user_id"];
 				//echo $username; die();
 				$message  ="";
 				if($data_user !=""){
 					if($email == $request->input('email')){
 						 if($password == $request->input('password') and $email == $request->input('email')){
-							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username));
-							 //session()->put('session_login', $email); 
-							 //session(['session_login' => $email]);
-							 //print_r(session('session_login')); die();
-							  $request->session()->flash('session_login2', 'this value is from session flash');
-								return Redirect::to('members');
+							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
+							  $message="Welcome";								
+								return Redirect::to('members')->with('message', $message);
 						 }else{	
-							$message ="Email or password is incorrect";
-							return Redirect::to('')->with('message', $message);
+							  $message ="Email or password is incorrect";
+							  return Redirect::to('')->with('message', $message);
 						 }
 					}else{
 							$message ="Email or password is incorrect, <br/>please try again";
@@ -80,8 +74,7 @@ class login extends Controller
 											->count();
 											return $data;
 		}
-		
-		
+	
 		public function do_register(Request $request){
 			$username=$request->input("username");
 			$password=$request->input("password");
@@ -98,11 +91,14 @@ class login extends Controller
 					$save=app_users::insert($user);				
 					if($save==1){
 						$message="Registration successful";
-						 $request->session()->put('session_login',array('email'=>$email));
+						 $data_user=$this->getUserData($email);
+						 $app_user_id=$data_user["app_user_id"];
+						$request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
+						return Redirect::to('members');
 					}else{
 						$message="Registration failed";
 					}
-					return Redirect::to('members');
+				
 			 }else{
 				  $message="Registrtion failed your email is already registered";
 				 return Redirect::to('')				
