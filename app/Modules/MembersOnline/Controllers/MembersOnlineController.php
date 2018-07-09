@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\MembersProfiles\Controllers;
+namespace App\Modules\MembersOnline\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Redirect;
-class MembersProfilesController extends Controller
+
+class MembersOnlineController extends Controller
 {
 
     /**
@@ -15,8 +15,8 @@ class MembersProfilesController extends Controller
      */
     public function index()
     {
-				return Redirect::to('members_online')->with("message","members online");
-        //return view("MembersProfiles::index");
+			  echo session()->get('message'); die();
+        //return view("MembersOnline::index");
     }
 
     /**

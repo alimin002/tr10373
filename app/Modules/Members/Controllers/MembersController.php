@@ -15,10 +15,11 @@ class MembersController extends Controller
 			
 			 /**
        if ($request->session()->exists('session_login')==false) {
-						//return Redirect::to('logout')->send();
+						return Redirect::to('logout')->send();
 						echo "session is empty";
 			 }
-			**/
+			 **/
+			
 		}
 		
 
@@ -29,6 +30,16 @@ class MembersController extends Controller
      */
     public function index(Request $request)
     {
+				//print_r(session('session_login')); die();
+				//echo Session::get('message')."aaaaaa bbbb ccccc";
+				//echo session('message'); die();
+				//die();
+				//echo $request->session()->keep(['message']);
+				//echo session('message');
+				//var_dump(session()->get('message'));
+				//die();
+				//echo Session::get('message');
+				//echo session()->get('message'); die();
         return view("Members::index");
 			
     }

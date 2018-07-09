@@ -59,6 +59,10 @@
 													<i class="ace-icon fa fa-pencil bigger-120 green"></i>
 													Edit Profile
 												</a>
+												<a href="#" class="btn btn-link" onclick="showFormUpload()">
+													<i class="ace-icon fa fa-camera bigger-120 green"></i>
+													Change Photo
+												</a>
 												<a href="#" class="btn btn-link">
 													<i class="ace-icon fa fa-picture-o bigger-120 green"></i>
 													Album
@@ -95,57 +99,69 @@
 										<div class="space-12"></div>
 
 										<!-- #section:pages/profile.info -->
-										<div class="profile-user-info profile-user-info-striped">
-											<div class="profile-info-row">
-												<div class="profile-info-name"> Username </div>
+										<form name="frm-edit-profile-index" id="frm-edit-profile-index">
+											<div class="profile-user-info profile-user-info-striped">
+												<div class="profile-info-row">
+													<div class="profile-info-name"> Username </div>
 
-												<div class="profile-info-value">
-													<span class="editable editable-click" id="username">alexdoe</span>
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="username">
+															{{ session('session_login')['username'] }}
+														</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name">Address</div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="country">
+														
+														</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name">Birth Date</div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="age">
+													
+														</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name">Birth Place</div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="signup">
+														
+														</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name">Gender</div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="login">
+															
+														</span>
+													</div>
+												</div>
+
+												<div class="profile-info-row">
+													<div class="profile-info-name"> About Me </div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="about">
+															
+														</span>
+													</div>
 												</div>
 											</div>
-
-											<div class="profile-info-row">
-												<div class="profile-info-name"> Location </div>
-
-												<div class="profile-info-value">
-													<i class="fa fa-map-marker light-orange bigger-110"></i>
-													<span class="editable editable-click" id="country">Netherlands</span>
-													<span class="editable editable-click" id="city">Amsterdam</span>
-												</div>
-											</div>
-
-											<div class="profile-info-row">
-												<div class="profile-info-name"> Age </div>
-
-												<div class="profile-info-value">
-													<span class="editable editable-click" id="age">38</span>
-												</div>
-											</div>
-
-											<div class="profile-info-row">
-												<div class="profile-info-name"> Joined </div>
-
-												<div class="profile-info-value">
-													<span class="editable editable-click" id="signup">2010/06/20</span>
-												</div>
-											</div>
-
-											<div class="profile-info-row">
-												<div class="profile-info-name"> Last Online </div>
-
-												<div class="profile-info-value">
-													<span class="editable editable-click" id="login">3 hours ago</span>
-												</div>
-											</div>
-
-											<div class="profile-info-row">
-												<div class="profile-info-name"> About Me </div>
-
-												<div class="profile-info-value">
-													<span class="editable editable-click" id="about">Editable as WYSIWYG</span>
-												</div>
-											</div>
-										</div>
+										</form>
 
 										<!-- /section:pages/profile.info -->
 										<div class="space-20"></div>
