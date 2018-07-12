@@ -1,13 +1,17 @@
+		<!---
 		<script src="{{url('assets/js/jquery.min.js')}}"></script>
-		<script src="{{url('assets/js/bootstrap.min.js')}}"></script>
 		<script src="{{url('assets/js/dropzone.min.js')}}"></script>
 		<script src="{{url('assets/js/ace-elements.min.js')}}"></script>
 		<script src="{{url('assets/js/ace.min.js')}}"></script>
-		<script type="text/javascript">
-		 //droppzone image Upload
+		-->
+		<script src="{{url('assets/js/jquery.min.js')}}"></script>
+		<script src="{{url('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
+		<script type="text/javascript">		
+			function showFormUpload(){
+				//droppzone image Upload
 			jQuery(function($){
 			
-		//pre-show a file name, for example a previously selected file
+				//pre-show a file name, for example a previously selected file
 				//$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
 			
 			
@@ -110,15 +114,64 @@
 			
 			
 			});
-			function showFormUpload(){
 				$("#modal-upload-foto").modal("show");
 			}
-			
+			//datepicker plugin
+				//link
+				jQuery(function($){
+				$('.date-picker').datepicker({
+					autoclose: true,
+					todayHighlight: true
+				})
+				//show datepicker when clicking on the icon
+				.next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+				});
 			function showFormEditProfile(){
+				
+				var app_user_profile_id=$("#app_user_profile_id_view").val();
+				
+				if(app_user_profile_id != ""){
+						$.ajax({ 
+						type: 'GET', 
+						url: '{{url("my_profile/edit")}}'+'/'+app_user_profile_id, 
+						dataType: 'json',
+						success: function (response){ 
+							//alert("response oke");						
+							$("#frm-edit-profile #app_user_profile_id").val(response["app_user_profile_id"]);
+							$("#frm-edit-profile #fullname").val(response["fullname"]);							
+							$("#frm-edit-profile #birth_place").val(response["birth_place"]);
+							$("#frm-edit-profile #birth_date").val(response["birth_date"]);
+							$("#frm-edit-profile #marital_status_id").val(response["marital_status_id"]);
+							$("#frm-edit-profile #telephone_number").val(response["telephone_number"]);											
+							$("#frm-edit-profile #addres").val(response["addres"]);		
+							$("#frm-edit-profile #about_me").val(response["about_me"]);
+                            var gender="";
+							if(gender_id==1){
+								gender="Male"
+							}else{
+								gender="Female"
+							}
+							$("#frm-edit-profile #gender_id").empty();
+							$("#frm-edit-profile #gender_id").prepend("<option value="+gender_id+">"+gender+"</option>");
+													
+						}
+				});
+				}
+				
+				
 				$("#modal-edit-profile").modal("show");
+			}
+			
+			function updateProfile(){
+				//alert(111);
+				$("#modal-edit-profile").modal("hide");
+				$("#frm-edit-profile").submit();				
 			}
 			
 			function uploadPhoto(){
 				$("#modal-upload-foto").modal("hide");
+				$("#form-upload-profile").submit();
 			}
 		</script>

@@ -226,7 +226,14 @@
 						</li>
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								
+								@if(session('session_photo_profile')=="")
+									
 								<img class="nav-user-photo" src="{{url('assets/avatars/avatar2.png')}}" alt="user's Photo" />
+								@else
+									
+								<img class="nav-user-photo" src="{{url('uploads/image').'/'.session('session_login')['app_user_id'].'/'.session('session_photo_profile')}}" alt="user's Photo" />
+								@endif
 								<span class="user-info">
 									<small>Welcome,</small>
 									{{ session('session_login')['username'] }}
@@ -244,7 +251,7 @@
 								</li>
 
 								<li>
-									<a href="profile.html">
+									<a href="{{url('my_profile')}}">
 										<i class="ace-icon fa fa-user"></i>
 										Profile
 									</a>

@@ -7,29 +7,22 @@
 				<h4 class="modal-title">Change Photo Profile</h4>
 			</div>
 			<div class="modal-body">
-						<div class="widget-main">												
-													<div class="form-group">
-														<div class="col-xs-12">
-															<label class="ace-file-input ace-file-multiple">
-																<input multiple="" type="file" id="id-input-file-3">
-																<!----
-																<span class="ace-file-container" data-title="Drop files here or click to choose"><span class="ace-file-name" data-title="No File ..."><i class=" ace-icon ace-icon fa fa-cloud-upload"></i></span>
-																</span>
-																<a class="remove" href="#"><i class=" ace-icon fa fa-times"></i></a>--->
-															</label>
-																<!-- #section:custom/file-input.filter -->
-															<label>
-																<input type="checkbox" name="file-format" id="id-file-format" class="ace" checked>
-																<span class="lbl"> Allow only images</span>
-															</label>
-
-															<!-- /section:custom/file-input.filter -->
-															<!-- /section:custom/file-input -->
-														</div>
-													</div>
-
-												
-												</div>
+				<div class="widget-main">
+					<div class="form-group">
+						<form id="form-upload-profile" action="{{url('my_profile/upload_photo_profile')}}" method="POST" enctype="multipart/form-data">
+							{!! csrf_field() !!}
+							<div class="col-xs-12">
+								<label class="ace-file-input ace-file-multiple">
+									<input multiple="" type="file" id="id-input-file-3" name="id-input-file-3"/>
+								</label>
+								<label>
+									<input type="checkbox" name="file-format" id="id-file-format" class="ace" checked />
+									<span class="lbl"> Allow only images</span>
+								</label>
+							</div>
+						</form>
+					</div>						
+				</div>
 														
 			</div>
 			<div class="modal-footer">

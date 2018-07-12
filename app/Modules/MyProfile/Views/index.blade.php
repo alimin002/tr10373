@@ -5,7 +5,12 @@
 										<div>
 											<!-- #section:pages/profile.picture -->
 											<span class="profile-picture" onclick="showFormUpload()">
+												@if(session('session_photo_profile')=="")
 												<img id="avatar" class="editable img-responsive editable-click editable-empty" alt="Alex's Avatar" src="{{url('assets/avatars/profile-pic.jpg')}}">
+											    @else
+												<img id="avatar" class="editable img-responsive editable-click editable-empty" alt="Alex's Avatar" src="{{url('uploads/image').'/'.session('session_login')['app_user_id'].'/'.$photo_profile}}">
+												
+												@endif
 											</span>
 
 											<!-- /section:pages/profile.picture -->
@@ -16,7 +21,7 @@
 													<a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
 														<i class="ace-icon fa fa-circle light-green"></i>
 														&nbsp;
-														<span class="white">Alex M. Doe</span>
+														<span class="white">{{ session('session_login')['username'] }}</span>
 													</a>
 
 													<ul class="align-left dropdown-menu dropdown-caret dropdown-lighter">
@@ -57,6 +62,7 @@
 											<div class="profile-contact-links align-left">
 												<a href="#" class="btn btn-link" onclick="showFormEditProfile()">
 													<i class="ace-icon fa fa-pencil bigger-120 green"></i>
+													<input type="hidden" id="app_user_profile_id_view" name="app_user_profile_id_view" value="{{$data_profile['app_user_profile_id']}}"/>
 													Edit Profile
 												</a>
 												<a href="#" class="btn btn-link" onclick="showFormUpload()">
@@ -110,13 +116,22 @@
 														</span>
 													</div>
 												</div>
+												<div class="profile-info-row">
+													<div class="profile-info-name"> Full Name </div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="username">
+															{{ $data_profile["fullname"] }} 
+														</span>
+													</div>
+												</div>
 
 												<div class="profile-info-row">
-													<div class="profile-info-name">Address</div>
+													<div class="profile-info-name">Addres</div>
 
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="country">
-														
+															{{ $data_profile["addres"] }}
 														</span>
 													</div>
 												</div>
@@ -126,7 +141,7 @@
 
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="age">
-													
+															{{ $data_profile["birth_date"] }}
 														</span>
 													</div>
 												</div>
@@ -136,7 +151,7 @@
 
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="signup">
-														
+														    {{ $data_profile["birth_place"] }}
 														</span>
 													</div>
 												</div>
@@ -146,7 +161,11 @@
 
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="login">
-															
+															@if($data_profile["gender_id"]==1)
+																Male
+																@else
+															    Female
+															@endif
 														</span>
 													</div>
 												</div>
@@ -156,7 +175,7 @@
 
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="about">
-															
+															{{ $data_profile["about_me"] }}
 														</span>
 													</div>
 												</div>
@@ -167,6 +186,7 @@
 										<div class="space-20"></div>
 
 									</div>
+									
 									@include('MyProfile::form_upload')
 									@include('MyProfile::form_edit_profile')
 									@include('MyProfile::action_js')

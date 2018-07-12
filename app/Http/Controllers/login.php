@@ -22,6 +22,7 @@ class login extends Controller
 		
 		public function displayLogin(Request $request ){
 				if ($request->session()->has('session_login')==false) {
+					//$photo_profile=$this->getUserData()
 					return view('guard');
 				}else{
 					return Redirect::to('members');
@@ -39,12 +40,14 @@ class login extends Controller
 				$password 			= $data_user["password"];
 				$username 			= $data_user["username"];
 				$app_user_id 		= $data_user["app_user_id"];
+				$photo_profile 		= $data_user["photo_profile"];
 				//echo $username; die();
 				$message  ="";
 				if($data_user !=""){
 					if($email == $request->input('email')){
 						 if($password == $request->input('password') and $email == $request->input('email')){
-							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
+							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id,'photo_profile'=>$photo_profile));
+							 $request->session()->put('session_photo_profile',$photo_profile);
 							  $message="Welcome";								
 								return Redirect::to('members')->with('message', $message);
 						 }else{	
@@ -76,14 +79,14 @@ class login extends Controller
 		}
 	
 		public function do_register(Request $request){
-			$username=$request->input("username");
-			$password=$request->input("password");
-			$email=$request->input("email");
+			$username     =$request->input("username");
+			$password     =$request->input("password");
+			$email        =$request->input("email");
 			
 			//echo $this->check_account_exists($email); die();
 			
 			$user=array("username"	=>$username,
-										"password"=>$password,
+									  "password"=>$password,
 									  "email"	  =>$email
 									 );
 				
@@ -94,6 +97,7 @@ class login extends Controller
 						 $data_user=$this->getUserData($email);
 						 $app_user_id=$data_user["app_user_id"];
 						$request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
+						//$request->session()->put("session_photo_profile",$photo_profile);
 						return Redirect::to('members');
 					}else{
 						$message="Registration failed";
