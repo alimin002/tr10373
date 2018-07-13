@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09 Jul 2018 pada 07.40
+-- Generation Time: 13 Jul 2018 pada 04.43
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -76,8 +76,19 @@ CREATE TABLE `app_users` (
   `email` varchar(150) NOT NULL,
   `join_date` datetime NOT NULL,
   `ip_address` varchar(50) NOT NULL,
-  `is_activated` int(11) NOT NULL DEFAULT '0'
+  `is_activated` int(11) NOT NULL DEFAULT '0',
+  `photo_profile` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `app_users`
+--
+
+INSERT INTO `app_users` (`app_user_id`, `username`, `password`, `email`, `join_date`, `ip_address`, `is_activated`, `photo_profile`) VALUES
+(1, 'alimin', 'alimin', 'alimin1313@gmail.com', '0000-00-00 00:00:00', '', 0, 'images.jpg'),
+(2, 'Yurima', 'yurima', 'yurimautami@gmail.com', '0000-00-00 00:00:00', '', 0, 'IMG-20180709-WA0000.jpg'),
+(3, 'subkhi', 'subkhi', 'subkhi@yahoo.com', '0000-00-00 00:00:00', '', 0, ''),
+(4, 'tika', 'tika', 'tika@yahoo.com', '0000-00-00 00:00:00', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -101,13 +112,23 @@ CREATE TABLE `app_users_baned` (
 CREATE TABLE `app_users_profile` (
   `app_user_profile_id` mediumint(15) NOT NULL,
   `app_user_id` mediumint(15) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
+  `fullname` varchar(100) NOT NULL,
   `gender_id` int(1) NOT NULL,
   `birth_date` date NOT NULL,
+  `birth_place` varchar(150) NOT NULL,
   `marital_status_id` smallint(6) NOT NULL,
   `telephone_number` varchar(100) NOT NULL,
-  `address` varchar(150) NOT NULL
+  `addres` varchar(150) NOT NULL,
+  `photo_profile` varchar(200) NOT NULL,
+  `about_me` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `app_users_profile`
+--
+
+INSERT INTO `app_users_profile` (`app_user_profile_id`, `app_user_id`, `fullname`, `gender_id`, `birth_date`, `birth_place`, `marital_status_id`, `telephone_number`, `addres`, `photo_profile`, `about_me`) VALUES
+(2, 1, 'indra sucipta aaa', 1, '2018-07-28', 'bandung', 0, '08746275645', 'bandung', '', 'I am free ');
 
 --
 -- Indexes for dumped tables
@@ -161,7 +182,7 @@ ALTER TABLE `app_messages`
 -- AUTO_INCREMENT for table `app_users`
 --
 ALTER TABLE `app_users`
-  MODIFY `app_user_id` mediumint(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `app_user_id` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `app_users_baned`
 --
@@ -171,7 +192,7 @@ ALTER TABLE `app_users_baned`
 -- AUTO_INCREMENT for table `app_users_profile`
 --
 ALTER TABLE `app_users_profile`
-  MODIFY `app_user_profile_id` mediumint(15) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `app_user_profile_id` mediumint(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
