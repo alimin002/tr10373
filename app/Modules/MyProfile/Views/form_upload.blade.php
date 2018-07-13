@@ -7,6 +7,7 @@
 				<h4 class="modal-title">Change Photo Profile</h4>
 			</div>
 			<div class="modal-body">
+
 				<div class="widget-main">
 					<div class="form-group">
 						<form id="form-upload-profile" action="{{url('my_profile/upload_photo_profile')}}" method="POST" enctype="multipart/form-data">
@@ -22,8 +23,7 @@
 							</div>
 						</form>
 					</div>						
-				</div>
-														
+				</div>														
 			</div>
 			<div class="modal-footer">
 				<button onclick="uploadPhoto()" type="button" class="btn btn-primary">Upload</button>

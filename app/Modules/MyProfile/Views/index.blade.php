@@ -125,6 +125,16 @@
 														</span>
 													</div>
 												</div>
+												<div class="profile-info-row">
+													<div class="profile-info-name">Birth Date</div>
+
+													<div class="profile-info-value">
+														<span class="editable editable-click" id="age">
+															{{ $data_profile["birth_date"] }}
+
+														</span>
+													</div>
+												</div>
 
 												<div class="profile-info-row">
 													<div class="profile-info-name">Addres</div>
@@ -132,19 +142,11 @@
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="country">
 															{{ $data_profile["addres"] }}
-														</span>
 													</div>
+
 												</div>
 
-												<div class="profile-info-row">
-													<div class="profile-info-name">Birth Date</div>
-
-													<div class="profile-info-value">
-														<span class="editable editable-click" id="age">
-															{{ $data_profile["birth_date"] }}
-														</span>
-													</div>
-												</div>
+												
 
 												<div class="profile-info-row">
 													<div class="profile-info-name">Birth Place</div>
@@ -166,6 +168,7 @@
 																@else
 															    Female
 															@endif
+														
 														</span>
 													</div>
 												</div>
@@ -175,17 +178,19 @@
 
 													<div class="profile-info-value">
 														<span class="editable editable-click" id="about">
+
 															{{ $data_profile["about_me"] }}
+
 														</span>
 													</div>
 												</div>
-											</div>
+											<!--</div>-->
 										</form>
 
 										<!-- /section:pages/profile.info -->
 										<div class="space-20"></div>
 
-									</div>
+									<!--</div>-->
 									
 									@include('MyProfile::form_upload')
 									@include('MyProfile::form_edit_profile')

@@ -14,7 +14,6 @@
 						<div class="profile-user-info profile-user-info-striped">
 							<div class="profile-info-row">
 								<div class="profile-info-name"> Username </div>
-
 								<div class="profile-info-value">
 									<span class="editable editable-click" id="username">
 									<input value="{{ session('session_login')['username'] }}" type="text" class="form-control" name="username" id="username"/>
@@ -52,7 +51,8 @@
 								<div class="profile-info-value">
 									<span class="editable editable-click" id="age">
 									<div class="input-group">
-										<input class="form-control date-picker" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy">
+										<input class="form-control date-picker" onchange="bindSelectedDate(this)" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy"/>
+										<input class="form-control" id="birth_date" name="birth_date" type="hidden"/>
 										<span class="input-group-addon">
 											<i class="fa fa-calendar bigger-110"></i>
 										</span>
@@ -65,7 +65,9 @@
 								<div class="profile-info-name">Birth Place</div>
 
 								<div class="profile-info-value">
-									<span class="editable editable-click" id="signup"><input type="text" class="form-control" name="birth_place" id="birth_place"></span>
+									<span class="editable editable-click" id="signup">
+										<input type="text" class="form-control" name="birth_place" id="birth_place">
+									</span>
 								</div>
 							</div>
 
@@ -95,6 +97,9 @@
 					</form>
 					<!-- /section:pages/profile.info -->
 					<div class="space-20"></div>														
+				    <!-- /section:pages/profile.info -->
+					<div class="space-20"></div>
+														
 			</div>
 			<div class="modal-footer">
 				<button onclick="updateProfile()" type="button" class="btn btn-primary">Update</button>

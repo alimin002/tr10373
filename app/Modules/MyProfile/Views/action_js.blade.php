@@ -1,9 +1,3 @@
-		<!---
-		<script src="{{url('assets/js/jquery.min.js')}}"></script>
-		<script src="{{url('assets/js/dropzone.min.js')}}"></script>
-		<script src="{{url('assets/js/ace-elements.min.js')}}"></script>
-		<script src="{{url('assets/js/ace.min.js')}}"></script>
-		-->
 		<script src="{{url('assets/js/jquery.min.js')}}"></script>
 		<script src="{{url('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
 		<script type="text/javascript">		
@@ -12,6 +6,11 @@
 			jQuery(function($){
 			
 				//pre-show a file name, for example a previously selected file
+
+		 //droppzone image Upload
+			jQuery(function($){
+			
+		//pre-show a file name, for example a previously selected file
 				//$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
 			
 			
@@ -107,27 +106,26 @@
 						//we can only reset file field to become empty again
 						//on any case you still should check files with your server side script
 						//because any arbitrary file can be uploaded by user and it's not safe to rely on browser-side measures
-					});
-				
+					});				
 				});
-			
-			
-			
 			});
-				$("#modal-upload-foto").modal("show");
+				
+			});
+			$("#modal-upload-foto").modal("show");
 			}
 			//datepicker plugin
 				//link
 				jQuery(function($){
-				$('.date-picker').datepicker({
-					autoclose: true,
-					todayHighlight: true
-				})
-				//show datepicker when clicking on the icon
-				.next().on(ace.click_event, function(){
-					$(this).prev().focus();
+					$('.date-picker').datepicker({
+						autoclose: true,
+						todayHighlight: true
+					})
+					//show datepicker when clicking on the icon
+					.next().on(ace.click_event, function(){
+						$(this).prev().focus();
+					});
 				});
-				});
+				
 			function showFormEditProfile(){
 				
 				var app_user_profile_id=$("#app_user_profile_id_view").val();
@@ -142,12 +140,19 @@
 							$("#frm-edit-profile #app_user_profile_id").val(response["app_user_profile_id"]);
 							$("#frm-edit-profile #fullname").val(response["fullname"]);							
 							$("#frm-edit-profile #birth_place").val(response["birth_place"]);
-							$("#frm-edit-profile #birth_date").val(response["birth_date"]);
+							
+						
+							
+							//$("#frm-edit-profile #birth_date").val(newdate);						
+							
+							
 							$("#frm-edit-profile #marital_status_id").val(response["marital_status_id"]);
 							$("#frm-edit-profile #telephone_number").val(response["telephone_number"]);											
 							$("#frm-edit-profile #addres").val(response["addres"]);		
 							$("#frm-edit-profile #about_me").val(response["about_me"]);
+							var gender_id=response["gender_id"];
                             var gender="";
+							$("#frm-edit-profile #gender_id").empty();
 							if(gender_id==1){
 								gender="Male"
 							}else{
@@ -155,6 +160,8 @@
 							}
 							$("#frm-edit-profile #gender_id").empty();
 							$("#frm-edit-profile #gender_id").prepend("<option value="+gender_id+">"+gender+"</option>");
+							$("#frm-edit-profile #gender_id").append("<option value="+1+">"+"Male"+"</option>");
+							$("#frm-edit-profile #gender_id").append("<option value="+0+">"+"Female"+"</option>");
 													
 						}
 				});
@@ -170,8 +177,21 @@
 				$("#frm-edit-profile").submit();				
 			}
 			
+			function convertDate(date){
+					var date = $("#id-date-picker-1").val();
+					var newdate = date.split("-").reverse().join("-");
+					return newdate;
+			}
+			
 			function uploadPhoto(){
 				$("#modal-upload-foto").modal("hide");
 				$("#form-upload-profile").submit();
+			}
+			function bindSelectedDate(selected_element){
+				var date= selected_element.value;
+				//date=convertDate(date);
+				$("#frm-edit-profile #birth_date").val(convertDate(date));
+				//alert(date);
+				
 			}
 		</script>

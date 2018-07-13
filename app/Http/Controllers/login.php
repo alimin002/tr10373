@@ -22,7 +22,6 @@ class login extends Controller
 		
 		public function displayLogin(Request $request ){
 				if ($request->session()->has('session_login')==false) {
-					//$photo_profile=$this->getUserData()
 					return view('guard');
 				}else{
 					return Redirect::to('members');
@@ -41,13 +40,15 @@ class login extends Controller
 				$username 			= $data_user["username"];
 				$app_user_id 		= $data_user["app_user_id"];
 				$photo_profile 		= $data_user["photo_profile"];
+
 				//echo $username; die();
 				$message  ="";
 				if($data_user !=""){
 					if($email == $request->input('email')){
 						 if($password == $request->input('password') and $email == $request->input('email')){
-							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id,'photo_profile'=>$photo_profile));
 							 $request->session()->put('session_photo_profile',$photo_profile);
+							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
+
 							  $message="Welcome";								
 								return Redirect::to('members')->with('message', $message);
 						 }else{	
@@ -67,6 +68,7 @@ class login extends Controller
 			
 		public function doLogout(Request $request){
 				$request->session()->forget('session_login');
+				$request->session()->forget('session_photo_profile');
 				//$request->session()->forget('session_message');
 				return Redirect::to('');
 		}
@@ -97,7 +99,6 @@ class login extends Controller
 						 $data_user=$this->getUserData($email);
 						 $app_user_id=$data_user["app_user_id"];
 						$request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
-						//$request->session()->put("session_photo_profile",$photo_profile);
 						return Redirect::to('members');
 					}else{
 						$message="Registration failed";

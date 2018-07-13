@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="{{url('assets/css/font-awesome.min.css')}}" />
 		<link rel="stylesheet" href="{{URL('assets/font-awesome/css/font-awesome.css')}}" />
 		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="{{URL('assets/css/datepicker.css')}}" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="{{url('assets/css/ace-fonts.css')}}"/>
