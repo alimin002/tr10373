@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\app_users;
+use App\Modules\MyProfile\Models\MyProfile;
 use Redirect;
 use Session;
 use Crypt;
@@ -21,15 +22,23 @@ class login extends Controller
 	
 		
 		public function displayLogin(Request $request ){
+			
+			
 				if ($request->session()->has('session_login')==false) {
 					return view('guard');
 				}else{
 					return Redirect::to('members');
 				}
+				
 		}
 		
 		public function getUserData($email){
 			$data=app_users::where('email','=',$email)->first();
+			return $data;
+		}
+		
+		public function isProfileComplete($app_user_id){
+			$data=MyProfile::where('app_user_id','=',$app_user_id)->count();
 			return $data;
 		}
 		
@@ -47,6 +56,8 @@ class login extends Controller
 					if($email == $request->input('email')){
 						 if($password == $request->input('password') and $email == $request->input('email')){
 							 $request->session()->put('session_photo_profile',$photo_profile);
+							 $is_profile_complete = $this->isProfileComplete($app_user_id);
+							 $request->session()->put('session_is_profile_complete',$is_profile_complete);
 							 $request->session()->put('session_login',array('email'=>$email,'username'=>$username,'app_user_id'=>$app_user_id));
 
 							  $message="Welcome";								

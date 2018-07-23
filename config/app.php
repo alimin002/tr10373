@@ -158,7 +158,6 @@ return [
 				//modular class
 				ArtemSchander\L5Modular\ModuleServiceProvider::class,
 				App\Providers\Common::class,
-				App\Providers\Lookup::class,
 				//pdf creator
 				Barryvdh\DomPDF\ServiceProvider::class,
     ],

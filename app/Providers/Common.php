@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use app_suplier;
+use App\Modules\MyProfile\Models\MyProfile;
 class Common extends ServiceProvider
 {
     /**
@@ -28,31 +28,10 @@ class Common extends ServiceProvider
 				
     }
 		
-		public static function generateTransactionNumber($prefix,$number){
-			if($number==""){
-				$number =0;
-			}
-			$number=$number+1;
-			//convert type= string
-			$str = (string)$number;
-			$string_zero="000000";
-			//echo substr($string_zero,strlen($str)); die();
-			//this command is to automaticly fix digit size pattern '6 digit number'
-			$result = $prefix.substr($string_zero,strlen($str)).$str;
-			return $result;
-	
+		public static function get_member_by_user_id($app_user_id){
+			$member = MyProfile::where("app_user_id" ,"=",$app_user_id)->first();
+			return $member;
 		}
 		
-		public static function number_with_commas($number){
-			$result = number_format($number);
-			return $result;
-		}
-		public static function removeCommas($str){
-			$str = str_replace( ',', '', $str );
-
-			$result = intval($str);
-			
-			return $result;
-		}
 	
 }

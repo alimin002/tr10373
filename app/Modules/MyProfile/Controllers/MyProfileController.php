@@ -9,6 +9,7 @@ use App\Modules\MyProfile\Models\MyProfile;
 use Storage;
 use Redirect;
 use Carbon\Carbon;
+use Session;
 class MyProfileController extends Controller
 {
 		//direct access guard
@@ -23,8 +24,10 @@ class MyProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+		//print_r($request->session()->reflash());
+		//echo Session::get('message'); die();
 		$photo_profile=$this->getUserData(session('session_login')['app_user_id'])["photo_profile"];
 		$data_profile =$this->getDataProfile(session('session_login')['app_user_id']);
         return view("MyProfile::index")
@@ -132,7 +135,7 @@ class MyProfileController extends Controller
 	   }else{
 		   $update=MyProfile::where('app_user_id', '=',$app_user_id)->update($user_profile);
 	   }
-	  
+		$request->session()->put('session_is_profile_complete',1);
 	   return redirect()->to('my_profile');
 	}
 

@@ -4,24 +4,37 @@ namespace App\Modules\Members\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Modules\MyProfile\Models\MyProfile;
+use App\Providers\Common;
 Use Redirect;
 use Session;
+use App\app_users;
 class MembersController extends Controller
 {
 			//direct access guard
 		
-			public function __construct(Request $request) 
+		public function __construct(Request $request) 
 		{
 			
-			 /**
-       if ($request->session()->exists('session_login')==false) {
-						return Redirect::to('logout')->send();
-						echo "session is empty";
-			 }
-			 **/
+			//return Redirect::to('logout')->send();
+			
+			 
+			if ($request->session()->has('session_login')==false) {
+				return Redirect::to('logout')->send();
+			}
+			
+			//echo session('session_login')["is_profile_complete"]; die();
+			if(session('session_is_profile_complete')==""){
+				//echo "profile not complete"; die();
+				$message="Please complete your profile before interaction with another user";
+				$request->session()->flash('message', $message);
+				//echo session()->get('message'); die();
+				return Redirect::to('my_profile')->send();
+			}
+		
 			
 		}
-		
+	
 
     /**
      * Display a listing of the resource.
@@ -30,17 +43,18 @@ class MembersController extends Controller
      */
     public function index(Request $request)
     {
-				//print_r(session('session_login')); die();
-				//echo Session::get('message')."aaaaaa bbbb ccccc";
-				//echo session('message'); die();
-				//die();
-				//echo $request->session()->keep(['message']);
-				//echo session('message');
-				//var_dump(session()->get('message'));
-				//die();
-				//echo Session::get('message');
-				//echo session()->get('message'); die();
-        return view("Members::index");
+		$user_gender=Common::get_member_by_user_id(session('session_login')['app_user_id']);
+		
+		if($user_gender["gender_id"]==0){
+			$gender_where=1;
+		}else{
+			$gender_where=0;
+		}
+		
+		$data_member=MyProfile::leftJoin('app_users','app_users_profile.app_user_id','=','app_users.app_user_id')
+								->where("gender_id","=",$gender_where)
+								 ->get();
+        return view("Members::index")->with("data",$data_member);
 			
     }
 
